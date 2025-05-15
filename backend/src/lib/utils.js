@@ -7,7 +7,7 @@ export const generateToken = (userId, res)=>{
     }
   )
   //more value to be set here
-  res.cokkie({
-    token : jwtToken
+  res.cokkie("token", jwtToken,{
+    
   })
 }

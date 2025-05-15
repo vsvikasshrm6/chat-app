@@ -1,12 +1,26 @@
 import { User } from "../models/user.js";
 import bcrypt from "bcrypt";
+import { generateToken } from './../lib/utils.js';
+
 
 export const login = (req, res)=>{
-   res.send("Login");
+   const {email , password}  = req.body;
+   if(!email || !password){
+      res.status(400).json({sucess : false, message: "Invalid creditionals"});
+   }
+
+   const user = User.findOne({email});
+   const isPasswordCorrect = bcrypt.compare(password, user.password);
+   if(!isPasswordCorrect){
+      res.status(400).json({sucess : false, message: "Invalid creditionals"});
+   }
+   generateToken();
+   res.status(200).json({sucess : true, message: "Login in successfull"});
 }
 
 export const logout = (req, res)=>{
-   res.send("Logout");
+   res.cookie("token", "");
+   res.status(200).json({success: true, message: "Logout successfull"});
 }
 
 export const signup = (req, res)=>{
@@ -28,6 +42,16 @@ export const signup = (req, res)=>{
       email,
       password : hashedPassword
    })
-   
+   generateToken();
    newUser.save();
+   res.status(200).json({success: true, message : "Login successfull" })
+}
+export const update = (req, res)=>{
+   const {userId} = req.body;
+   const updatedImage = req.body;
+   if(!updatedImage){
+      return res.status(400).json({success: false, message: "Updated Image is required"});
+   }
+   const updatedUser = User.findOneAndUpdate({userId},{image : updatedImage}, {new: true});
+   res.status(200).json({success : true, message : "Profile updated successfully"});
 }
