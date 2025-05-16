@@ -14,7 +14,7 @@ export const login = (req, res)=>{
    if(!isPasswordCorrect){
       res.status(400).json({sucess : false, message: "Invalid creditionals"});
    }
-   generateToken();
+   generateToken(user._id, res);
    res.status(200).json({sucess : true, message: "Login in successfull"});
 }
 
@@ -42,7 +42,7 @@ export const signup = (req, res)=>{
       email,
       password : hashedPassword
    })
-   generateToken();
+   generateToken(user._id, res);
    newUser.save();
    res.status(200).json({success: true, message : "Login successfull" })
 }

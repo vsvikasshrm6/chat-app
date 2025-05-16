@@ -5,9 +5,9 @@ import { protectedRoute } from "../middleware/protectedRoute.js";
 
 const authenticationRouter = Router();
 
-authenticationRouter.post('/api/login', login)
-authenticationRouter.post('/api/logout', logout)
-authenticationRouter.post('/api/signup', signup)
-authenticationRouter.put("/api/update", protectedRoute, update)
+authenticationRouter.post('/login', login)
+authenticationRouter.post('/logout', logout)
+authenticationRouter.post('/signup', signup)
+authenticationRouter.put("/update", protectedRoute, update)
 
 export default authenticationRouter;

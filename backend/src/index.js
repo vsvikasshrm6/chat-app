@@ -9,7 +9,9 @@ const app = express();
 app.use(cookieParser())
 app.use(express.json());
 const PORT = process.env.PORT
-app.use('/', authenticationRouter)
+
+app.use('/api/auth', authenticationRouter)
+app.use('/api/message', authenticationRouter)
 
 app.listen(process.env.PORT, ()=>{
   console.log("Connection established on PORT" + PORT)
