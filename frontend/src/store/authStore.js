@@ -1,9 +1,10 @@
 import {create} from "zustand"
-import { axiosInstance } from "./axios"
+import { axiosInstance } from "../libs/axios"
 
 export const authStore = create((set)=>({
   authUser: null,
   isCheckingAuth : true,
+  isLogging : false,
 
   checkAuth : async ()=>{
     try {
@@ -17,5 +18,20 @@ export const authStore = create((set)=>({
       set({isCheckingAuth : false})
     }
       
+  },
+  login : async (login)=>{
+    set({isLogin : true})
+    try {
+      const res = await axiosInstance.post('api/auth/login',login)
+      set({authUser : res.data})
+      
+    } catch (error) {
+      console.log(error.message)
+    }
+    finally{
+        set({isLogging : false})
+    }
+    
+    }
   }
-}))
+))

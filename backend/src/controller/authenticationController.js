@@ -15,7 +15,12 @@ export const login = (req, res)=>{
       res.status(400).json({sucess : false, message: "Invalid creditionals"});
    }
    generateToken(user._id, res);
-   res.status(200).json({sucess : true, message: "Login in successfull"});
+   res.status(200).json({
+      _id : user._id,
+      fullName: user.fullName,
+      email: user.email,
+      profilePic: user.profilePic,
+   });
 }
 
 export const logout = (req, res)=>{
@@ -54,4 +59,13 @@ export const update = (req, res)=>{
    }
    const updatedUser = User.findOneAndUpdate({userId},{image : updatedImage}, {new: true});
    res.status(200).json({success : true, message : "Profile updated successfully"});
+}
+
+export const check = (req, res)=>{
+   if(req.user){
+      res.staus(200).json({message: "Authorised"})
+   }
+   else{
+      res.status(400).json({message : "Unauthorised Request"});
+   }
 }
