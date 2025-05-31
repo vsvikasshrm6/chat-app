@@ -29,7 +29,8 @@ function App() {
         <Route path='/settingsPage' element ={<Settings/>}></Route>
         <Route path='/login' element = {<Login/>}></Route>
         <Route path='/signup' element= {<Signup/>}></Route>
-        <Route path='/profile' element = {authUser ? <Profile/> : <Navigate to={"/login"}/>}></Route>
+        {/* <Route path='/profile' element = {authUser ? <Profile/> : <Navigate to={"/login"}/>}></Route> */}
+        <Route path='/profile' element = { <Profile/>}></Route>
       </Routes>
       
     </div>

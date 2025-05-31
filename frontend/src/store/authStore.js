@@ -5,6 +5,7 @@ export const authStore = create((set)=>({
   authUser: null,
   isCheckingAuth : true,
   isLogging : false,
+  isUpdatingProfile : false,  
 
   checkAuth : async ()=>{
     try {
