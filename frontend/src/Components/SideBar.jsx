@@ -1,0 +1,49 @@
+import { Users } from "lucide-react";
+import { authStore } from "../store/authStore";
+
+export default function SideBar() {
+  const { onlineUser } = authStore();
+  console.log(onlineUser);
+  return (
+    <aside className="h-full w-20 lg:w-72 border-r border-base-300 flex flex-col transition-all duration-200">
+      <div className="border-b border-base-300 w-full p-5">
+        <div className="flex items-center gap-2">
+          <Users className="size-6" />
+          <span className="font-medium hidden lg:block">Contacts</span>
+        </div>
+         
+        <div className="mt-3 flex items-center gap-2">
+          <label className="cursor-pointer flex items-center gap-2">
+          <input type="checkBox" className="checkbox checkbox-sm"></input>
+          <span>Show only online</span>
+        </label>
+        <span className="text-xs text-zinc-200 ">Online user length</span>
+          </div> 
+      </div>
+
+       <div className=" verflow-y-auto w-full py-3">
+          {onlineUser.map((user) => (
+            <button
+             key={user?.id}
+             className={`flex flex-col items-center gap-3
+              hover:bg-base-300 transition-colors
+
+              `}
+            >
+              <div className="relative mx-auto lg:mx-0">
+                <img
+                  src={user.profilePic || "/avator.png"}
+                  alt={user?.name}
+                  className="size-12 rounded-full object-cover"
+                />
+              </div>
+              <div className="text-left hidden lg:block min-w-0">
+                  <div className="truncate font-medium">{user}</div>
+                </div>
+            </button>
+          ))}
+        </div>
+
+    </aside>
+  );
+}

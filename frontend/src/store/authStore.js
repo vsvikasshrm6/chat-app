@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 
 export const authStore = create((set)=>({
   authUser: null,
+  onlineUser : ["jon", "tom", "rom","jon", "tom", "rom", "jon", "tom", "rom", "jon", "tom", "rom"],
   isCheckingAuth : true,
   isLogging : false,
   isUpdatingProfile : false,  

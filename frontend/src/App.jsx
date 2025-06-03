@@ -25,7 +25,8 @@ function App() {
     <div data-theme="dark">
       <NavBar/>
       <Routes>
-        <Route path='/' element = {authUser? <HomePage/> : <Navigate to={"/login"}/>}></Route>
+        {/* <Route path='/' element = {authUser? <HomePage/> : <Navigate to={"/login"}/>}></Route> */}
+        <Route path='/' element = {<HomePage/>}></Route>
         <Route path='/settings' element ={<SettingsPage/>}></Route>
         <Route path='/login' element = {<Login/>}></Route>
         <Route path='/signup' element= {<Signup/>}></Route>
