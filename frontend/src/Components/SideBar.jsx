@@ -21,7 +21,7 @@ export default function SideBar() {
           </div> 
       </div>
 
-       <div className=" verflow-y-auto w-full py-3">
+       <div className=" overflow-y-auto w-full py-3">
           {onlineUser.map((user) => (
             <button
              key={user?.id}
