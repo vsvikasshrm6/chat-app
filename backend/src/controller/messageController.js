@@ -1,6 +1,8 @@
 import { Message } from "../models/message.js";
 import { User } from "../models/user.js";
 import { v2 as cloudinary } from 'cloudinary';
+import {getSocketIdFromUserId} from "./authenticationController.js"
+import { io } from "../lib/socket.js";
 
 export const getUser = async (req, res)=>{
   try {
@@ -58,6 +60,9 @@ export const sendMessage = async (req, res)=>{
       image: imageUrl
     })
     await newMessage.save();
+    const socketId = getSocketIdFromUserId(id);
+    if(socketId)io.to(socketId).emit("New Message", newMessage)
+    
     res.staus(200).json({success : true, message : "Message sent Successfully"});
   } catch (error) {
     res.staus(500).json({success : false, message : "Message not sent"});

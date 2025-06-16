@@ -1,6 +1,7 @@
 import {create} from "zustand"
-import { axiosInstance } from './../libs/axios';
+import { axiosInstance } from '../libs/axios';
 import toast from "react-hot-toast";
+import {authStore} from "./authStore"
 
 export const useChatStore = create((set)=>({
    messages : ["a", "b", "c", "d","e","f"],
@@ -40,6 +41,17 @@ export const useChatStore = create((set)=>({
          set({isUserLoading : false})
       }
    },
+   subscribeToMessage : ()=>{
+     const socket = authStore.getState().socket;
+     socket.on("New Message", (newMessage)=>{
+      set({messages : [...messages, newMessage]})
+     })
+   },
+   unsubscribeToMessage : ()=>{
+     const socket = authStore.getState().socket;
+     socket.off("New Message");
+   },
+
    isMessageLoading : false,
    isUserLoading : false,
    selectedUser : null,
