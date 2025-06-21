@@ -6,7 +6,7 @@ import cookieParser from "cookie-parser"
 import {app, io, server} from "./lib/socket.js"
 
 dotenv.config();
-const app = express();
+// const app = express();
 app.use(cookieParser())
 app.use(express.json());
 const PORT = process.env.PORT
