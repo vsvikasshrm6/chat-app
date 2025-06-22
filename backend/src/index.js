@@ -3,18 +3,25 @@ import authenticationRouter from "./routes/authenticationRoutes.js";
 import dotenv from "dotenv"
 import { connectDb } from "./lib/db.js";
 import cookieParser from "cookie-parser"
-import {app, io, server} from "./lib/socket.js"
+import cors from "cors"
+import {app, server} from "./lib/socket.js"
 
 dotenv.config();
 // const app = express();
 app.use(cookieParser())
 app.use(express.json());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 const PORT = process.env.PORT
 
 app.use('/api/auth', authenticationRouter)
 app.use('/api/message', authenticationRouter)
 
-server.listen(process.env.PORT, ()=>{
-  console.log("Connection established on PORT" + PORT)
+server.listen(5001, ()=>{
+  console.log("Connection established on PORT" + 5001)
   connectDb();
 });

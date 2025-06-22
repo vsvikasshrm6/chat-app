@@ -29,8 +29,9 @@ export const authStore = create((set, get)=>({
       
   },
   signUp : async (data)=>{
-    isSigniningUp = true;
+    set({isSigniningUp : true});
     try {
+      
       const res = await axiosInstance.post("/auth/signup", data)
       // here are we redirecting to login page or homepage -- is there a need to set authuser
       set({authUser : res.data})
@@ -40,7 +41,7 @@ export const authStore = create((set, get)=>({
       console.log("Error in signup" + error);
     }
     finally{
-      isSigniningUp = false;
+      set({isSigniningUp : false});
     }
   },
   login : async (data)=>{

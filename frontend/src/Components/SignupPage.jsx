@@ -14,9 +14,10 @@ const SignUpPage = () => {
     password: "",
   });
 
-  const { signup, isSigningUp } = authStore();
+  const { signUp, isSigniningUp } = authStore();
 
   const validateForm = () => {
+    
     if (!formData.fullName.trim()) return toast.error("Full name is required");
     if (!formData.email.trim()) return toast.error("Email is required");
     if (!/\S+@\S+\.\S+/.test(formData.email)) return toast.error("Invalid email format");
@@ -30,8 +31,9 @@ const SignUpPage = () => {
     e.preventDefault();
 
     const success = validateForm();
+    // console.log(success)
 
-    if (success === true) signup(formData);
+    if (success === true) signUp(formData);
   };
 
   return (
@@ -119,8 +121,8 @@ const SignUpPage = () => {
               </div>
             </div>
 
-            <button type="submit" className="btn btn-primary w-full" disabled={isSigningUp}>
-              {isSigningUp ? (
+            <button type="submit" className="btn btn-primary w-full" disabled={isSigniningUp}>
+              {isSigniningUp ? (
                 <>
                   <Loader2 className="size-5 animate-spin" />
                   Loading...

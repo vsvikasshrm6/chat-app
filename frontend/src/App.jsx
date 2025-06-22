@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import SettingsPage from './Components/SettingsPage'
 import Login from './Components/login'
 import Profile from './Components/Profile'
-import Signup from './Components/Signup'
+import SignUpPage from './Components/SignupPage'
 import HomePage from './Components/HomePage'
 import NavBar from './Components/NavBar'
 import { authStore } from './store/authStore';
@@ -29,7 +29,7 @@ function App() {
         {/* <Route path='/' element = {<HomePage/>}></Route> */}
         <Route path='/settings' element ={<SettingsPage/>}></Route>
         <Route path='/login' element = {<Login/>}></Route>
-        <Route path='/signup' element= {<Signup/>}></Route>
+        <Route path='/signup' element= {<SignUpPage/>}></Route>
         <Route path='/profile' element = {authUser ? <Profile/> : <Navigate to={"/login"}/>}></Route>
         {/* <Route path='/profile' element = { <Profile/>}></Route> */}
       </Routes>
