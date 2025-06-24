@@ -1,13 +1,14 @@
 import { Message } from "../models/message.js";
 import { User } from "../models/user.js";
 import { v2 as cloudinary } from 'cloudinary';
-import {getSocketIdFromUserId} from "./authenticationController.js"
+import { getSocketIdFromUserId } from "../lib/socket.js";
 import { io } from "../lib/socket.js";
 
 export const getUser = async (req, res)=>{
   try {
    const userId = req.user._id;
-   const allUser = await User.find({_id : {$ne : {userId}}});
+   console.log(req.user);
+   const allUser = await User.find({_id : {$ne : {userId}}}).select('-password');
    res.status(200).json({success : true , allUser : allUser}); 
   } catch (error) {
     res.status(500).json({success : false, message : "Error in fetching all user"})

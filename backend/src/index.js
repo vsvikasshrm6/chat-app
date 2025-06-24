@@ -1,5 +1,6 @@
 import express from "express"
 import authenticationRouter from "./routes/authenticationRoutes.js";
+import messageRouter from "./routes/messageRoutes.js"
 import dotenv from "dotenv"
 import { connectDb } from "./lib/db.js";
 import cookieParser from "cookie-parser"
@@ -19,7 +20,7 @@ app.use(
 const PORT = process.env.PORT
 
 app.use('/api/auth', authenticationRouter)
-app.use('/api/message', authenticationRouter)
+app.use('/api/message',messageRouter )
 
 server.listen(5001, ()=>{
   console.log("Connection established on PORT" + 5001)

@@ -1,13 +1,14 @@
 import { Users } from "lucide-react";
 import { authStore } from "../store/authStore";
 import { useChatStore } from './../store/useChatStore';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function SideBar() {
   const { onlineUser } = authStore();
-  const {users} = useChatStore();
+  const {users, getUser} = useChatStore();
   const [showOnlyOnline, setShowOnlyOnline] = useState();
   const filteredUser = showOnlyOnline ? onlineUser : users
+  useEffect(()=>{getUser()},[getUser]);
   
   return (
     <aside className="h-full w-20 lg:w-72 border-r border-base-300 flex flex-col transition-all duration-200">

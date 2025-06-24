@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { generateToken } from './../lib/utils.js';
 
 
+
 export const login = async (req, res)=>{
    const {email , password}  = req.body;
    if(!email || !password){
@@ -75,7 +76,7 @@ export const update = (req, res)=>{
 
 export const check = (req, res)=>{
    if(req.user){
-      res.staus(200).json({message: "Authorised"})
+      res.status(200).json({message: "Authorised"})
    }
    else{
       res.status(400).json({message : "Unauthorised Request"});
