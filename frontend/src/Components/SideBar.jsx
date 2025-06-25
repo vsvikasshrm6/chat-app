@@ -5,9 +5,10 @@ import { useEffect, useState } from "react";
 
 export default function SideBar() {
   const { onlineUser } = authStore();
-  const {users, getUser} = useChatStore();
+  const {users, getUser, setSelectedUser, selectedUser} = useChatStore();
   const [showOnlyOnline, setShowOnlyOnline] = useState();
   const filteredUser = showOnlyOnline ? onlineUser : users
+  console.log(users);
   useEffect(()=>{getUser()},[getUser]);
   
   return (
@@ -35,20 +36,32 @@ export default function SideBar() {
        <div className=" overflow-y-auto w-full py-3">
           {filteredUser.map((user) => (
             <button
-             key={user?.id}
-             className={`flex flex-col items-center gap-3
+             key={user?._id}
+             onClick={()=>{selectedUser(user)}}
+             className={`w-full p-3 flex flex-col items-center gap-3
               hover:bg-base-300 transition-colors
+              ${selectedUser?._id==user?._id ? "bg-base-300 ring-1 ring-base-300" : ""}
               `}
             >
               <div className="relative mx-auto lg:mx-0">
                 <img
                   src={user.profilePic || "/avator.png"}
-                  alt={user?.name}
+                  alt={user?.fullName}
                   className="size-12 rounded-full object-cover"
                 />
+                {
+                  onlineUsers.includes(user._id) && (
+                    <span
+                    className="absolute bottom-0 right-0 size-3 bg-green-600 rounded-full ring-2 ring-zinc-900"
+                    ></span>
+                  )
+                }
               </div>
               <div className="text-left hidden lg:block min-w-0">
-                  <div className="truncate font-medium">{user}</div>
+                  <div className="truncate font-medium">{user.fullName}</div>
+                  <div className="text-sm text-zinc-400">
+                {onlineUsers.includes(user._id) ? "Online" : "Offline"}
+              </div>
                 </div>
             </button>
           ))}

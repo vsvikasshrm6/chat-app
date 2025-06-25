@@ -7,9 +7,8 @@ import { io } from "../lib/socket.js";
 export const getUser = async (req, res)=>{
   try {
    const userId = req.user._id;
-   console.log(req.user);
-   const allUser = await User.find({_id : {$ne : {userId}}}).select('-password');
-   res.status(200).json({success : true , allUser : allUser}); 
+   const allUser = await User.find({_id : {$ne : userId}}).select('-password');
+   res.status(200).json(allUser); 
   } catch (error) {
     res.status(500).json({success : false, message : "Error in fetching all user"})
     console.log("Error in fetching all user" + error);
