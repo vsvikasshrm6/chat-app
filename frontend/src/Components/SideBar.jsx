@@ -8,7 +8,7 @@ export default function SideBar() {
   const {users, getUser, setSelectedUser, selectedUser} = useChatStore();
   const [showOnlyOnline, setShowOnlyOnline] = useState();
   const filteredUser = showOnlyOnline ? onlineUser : users
-  console.log(users);
+  console.log(onlineUser);
   useEffect(()=>{getUser()},[getUser]);
   
   return (
@@ -50,7 +50,7 @@ export default function SideBar() {
                   className="size-12 rounded-full object-cover"
                 />
                 {
-                  onlineUsers.includes(user._id) && (
+                  onlineUser.includes(user._id) && (
                     <span
                     className="absolute bottom-0 right-0 size-3 bg-green-600 rounded-full ring-2 ring-zinc-900"
                     ></span>
@@ -60,7 +60,7 @@ export default function SideBar() {
               <div className="text-left hidden lg:block min-w-0">
                   <div className="truncate font-medium">{user.fullName}</div>
                   <div className="text-sm text-zinc-400">
-                {onlineUsers.includes(user._id) ? "Online" : "Offline"}
+                {onlineUser.includes(user._id) ? "Online" : "Offline"}
               </div>
                 </div>
             </button>

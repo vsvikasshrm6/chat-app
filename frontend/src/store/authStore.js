@@ -89,7 +89,9 @@ export const authStore = create((set, get)=>({
     });
     socket.connect();
     socket.on("connection", ()=>{console.log("Connection done"+ socket.id)})
-    socket.on("getOnlineUserId", (userIds)=>{set({onlineUser : userIds})})
+    socket.on("OnlineUser", (userIds)=>{
+      console.log(userIds);
+      set({onlineUser : userIds})})
     set({socket: socket});
   },
   disconnectSocket : ()=>{

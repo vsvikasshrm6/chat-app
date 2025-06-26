@@ -17,7 +17,11 @@ export const getSocketIdFromUserId = (userId)=>{
 
 io.on('connection', (socket)=>{
    console.log("connection established" + socket.id)
-   onlineUserMap[socket.handshake.query.userId] = socket.id;
+   const userId = socket.handshake.query.userId;
+   
+   if(userId)onlineUserMap[userId] = socket.id;
+   console.log("Online user map")
+   console.log(onlineUserMap);
    io.emit("OnlineUser", Object.keys(onlineUserMap));
    socket.on("disconnect", ()=>{console.log("Connection disconnected" + socket.id)});
 })
