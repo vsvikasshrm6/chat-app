@@ -3,7 +3,7 @@ import { axiosInstance } from '../libs/axios';
 import toast from "react-hot-toast";
 import { authStore } from "./authStore"
 
-export const useChatStore = create((set) => ({
+export const useChatStore = create((set, get) => ({
    messages: [],
    users: [],
    isMessageLoading: false,
