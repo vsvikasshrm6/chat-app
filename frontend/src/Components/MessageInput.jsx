@@ -24,15 +24,16 @@ function MessageInput() {
      reader.readAsDataURL(file);
   }
   const handleSendMessage = async (e)=>{
-      e.prevent.default();
+      e.preventDefault();
       if(!text.trim() && !imagePreview)return;
       try {
+        
         await sendMessage({
           image : imagePreview,
           text : text.trim()
         })
-        setImagePreview(null);
-        setText("")
+        // setImagePreview(null);
+        // setText("")
         if (fileInputRef.current) fileInputRef.current.value = "";
 
       } catch (error) {

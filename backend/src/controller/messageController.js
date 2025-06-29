@@ -40,11 +40,12 @@ export const getMessage = async (req, res)=>{
 }
 export const sendMessage = async (req, res)=>{
   try {
+    // console.log("Send messafe in API")
     const {id} = req.params;
-    const {message, image} = req.body;
+    const {text, image} = req.body;
     const myId = req.user._id;
-    if(!message){
-      res.status(400).json({success : false, message: "Please enter message"});
+    if(!text){
+      return res.status(400).json({success : false, message: "Please enter message"});
     }
     let imageUrl;
     if(image){
@@ -53,18 +54,18 @@ export const sendMessage = async (req, res)=>{
     }
    
     
-    const newMessage = Message.create({
+    const newMessage = new Message({
       senderId : myId,
       receiverId : id,
-      message : message,
+      message : text,
       image: imageUrl
     })
     await newMessage.save();
     const socketId = getSocketIdFromUserId(id);
     if(socketId)io.to(socketId).emit("New Message", newMessage)
     
-    res.staus(200).json({success : true, message : "Message sent Successfully"});
+    return res.status(200).json({success : true, message : "Message sent Successfully"});
   } catch (error) {
-    res.staus(500).json({success : false, message : "Message not sent"});
+    return res.status(500).json({success : false, message : "Message not sent"});
   }
 }

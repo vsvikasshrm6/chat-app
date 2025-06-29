@@ -5,10 +5,13 @@ import { useEffect, useState } from "react";
 
 export default function SideBar() {
   const { onlineUser } = authStore();
+  // console.log(onlineUser);
   const {users, getUser, setSelectedUser, selectedUser} = useChatStore();
   const [showOnlyOnline, setShowOnlyOnline] = useState();
-  const filteredUser = showOnlyOnline ? onlineUser : users
-  console.log(onlineUser);
+  const filteredUser = showOnlyOnline ? users.filter((user)=>{
+    return onlineUser.includes(user._id)
+  }) : users
+  // console.log(onlineUser);
   useEffect(()=>{getUser()},[getUser]);
   
   return (
@@ -37,7 +40,7 @@ export default function SideBar() {
           {filteredUser.map((user) => (
             <button
              key={user?._id}
-             onClick={()=>{selectedUser(user)}}
+             onClick={()=>{setSelectedUser(user)}}
              className={`w-full p-3 flex flex-col items-center gap-3
               hover:bg-base-300 transition-colors
               ${selectedUser?._id==user?._id ? "bg-base-300 ring-1 ring-base-300" : ""}
