@@ -57,14 +57,14 @@ export const sendMessage = async (req, res)=>{
     const newMessage = new Message({
       senderId : myId,
       receiverId : id,
-      message : text,
+      text : text,
       image: imageUrl
     })
     await newMessage.save();
     const socketId = getSocketIdFromUserId(id);
     if(socketId)io.to(socketId).emit("New Message", newMessage)
     
-    return res.status(200).json({success : true, message : "Message sent Successfully"});
+    return res.status(200).json(newMessage);
   } catch (error) {
     return res.status(500).json({success : false, message : "Message not sent"});
   }
