@@ -11,6 +11,7 @@ export const useChatStore = create((set, get) => ({
    selectedUser: null,
 
    setSelectedUser: (selectedUser) => set({ selectedUser }),
+
    getMessages: async (userId) => {
       set({ isMessageLoading: true })
       try {
@@ -50,13 +51,14 @@ export const useChatStore = create((set, get) => ({
    subscribeToMessage: () => {
       //optimisation is to be done
       const socket = authStore.getState().socket;
-      socket.on("New Message", (newMessage) => {
+      socket.on("NewMessage", (newMessage) => {
+         console.log(newMessage)
          set({ messages: [...get().messages, newMessage] })
       })
    },
    unsubscribeToMessage: () => {
       const socket = authStore.getState().socket;
-      socket.off("New Message");
+      socket.off("NewMessage");
    },
 
 

@@ -31,7 +31,7 @@ export const getMessage = async (req, res)=>{
         }
       ]
     })
-    res.status(200).json({success : true, messages : messages});
+    res.status(200).json(messages);
 
   } catch (error) {
     res.status(500).json({sucess: false, message : error})
@@ -62,7 +62,7 @@ export const sendMessage = async (req, res)=>{
     })
     await newMessage.save();
     const socketId = getSocketIdFromUserId(id);
-    if(socketId)io.to(socketId).emit("New Message", newMessage)
+    if(socketId)io.to(socketId).emit("NewMessage", newMessage)
     
     return res.status(200).json(newMessage);
   } catch (error) {

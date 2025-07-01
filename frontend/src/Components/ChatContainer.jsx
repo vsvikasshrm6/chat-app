@@ -11,13 +11,13 @@ function ChatContainer() {
   const { authUser } = authStore();
   const messageEndRef = useRef(null);
   useEffect(()=>{
-      getMessages(selectedUser)
+      getMessages(selectedUser._id)
       subscribeToMessage();
-      return unsubscribeToMessage();
+      return ()=>unsubscribeToMessage();
   }
   , [selectedUser, getMessages, subscribeToMessage, unsubscribeToMessage])
   useEffect( ()=>{
-    if(messageEndRef && messages){
+    if(messageEndRef.current && messages){
       messageEndRef.current.scrollIntoView({behavior : "smooth"});
     }
   } , [messages])
@@ -29,7 +29,7 @@ function ChatContainer() {
         {messages.map((message) => (
           <div
             className={`chat ${
-              message?.senderId == authUser?._id ? "chat-end" : "chat-start"
+              message.senderId == authUser?._id ? "chat-end" : "chat-start"
             }`}
             key={message._id}
             ref={messageEndRef}

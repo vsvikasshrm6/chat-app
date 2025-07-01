@@ -20,8 +20,6 @@ io.on('connection', (socket)=>{
    const userId = socket.handshake.query.userId;
    
    if(userId)onlineUserMap[userId] = socket.id;
-   
-   
    io.emit("OnlineUser", Object.keys(onlineUserMap));
    socket.on("disconnect", ()=>{console.log("Connection disconnected" + socket.id)});
 })
