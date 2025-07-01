@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 
 export default function SideBar() {
   const { onlineUser } = authStore();
-  // console.log(onlineUser);
+  
   const {users, getUser, setSelectedUser, selectedUser} = useChatStore();
   const [showOnlyOnline, setShowOnlyOnline] = useState();
   const filteredUser = showOnlyOnline ? users.filter((user)=>{
     return onlineUser.includes(user._id)
   }) : users
-  // console.log(onlineUser);
+  
   useEffect(()=>{getUser()},[getUser]);
   
   return (
