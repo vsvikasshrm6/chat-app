@@ -17,7 +17,7 @@ function Profile() {
     fileReader.onload = async () => {
       const base64Image = fileReader.result;
       setUpdatedImage(base64Image);
-      await updateProfile({ profilePic: base64Image });
+      await updateProfile({ profilepic: base64Image });
     }
 
   }
@@ -39,7 +39,7 @@ function Profile() {
           <div className="flex flex-col items-center gap-4">
             <div className="relative">
               <img
-                src={updatedImage || "/avatar.png" || authUser.profilePic}
+                src={updatedImage || authUser.profilepic  || "/avatar.png" }
                 alt="Profile Pic"
                 className="size-32 rounded-full object-cover border-4" />
               <label

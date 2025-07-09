@@ -48,7 +48,7 @@ export default function SideBar() {
             >
               <div className="relative mx-auto lg:mx-0">
                 <img
-                  src={user.profilePic || "/avator.png"}
+                  src={user.profilepic || "/avator.png"}
                   alt={user?.fullName}
                   className="size-12 rounded-full object-cover"
                 />

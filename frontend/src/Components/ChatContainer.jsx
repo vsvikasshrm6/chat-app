@@ -39,8 +39,8 @@ function ChatContainer() {
                 <img
                 src={
                   message?.senderId == authUser?._id
-                    ? authUser?.profilePic || "avator.png"
-                    : selectedUser?.profilePic || "avator.png"
+                    ? authUser?.profilepic || "avator.png"
+                    : selectedUser?.profilepic || "avator.png"
                 }
                 alt="Profile Pic"
               />

@@ -20,7 +20,7 @@ export const login = async (req, res)=>{
       _id : user._id,
       fullName: user.fullName,
       email: user.email,
-      profilePic: user.profilePic,
+      profilepic: user.profilepic,
    });
 }
 
@@ -66,16 +66,16 @@ export const signup = async (req, res)=>{
 }
 export const update = async (req, res)=>{
    try {
-      const {profilePic} = req.body;
+      const {profilepic} = req.body;
       const userId = req.user._id;
 
-      if(!profilePic){
+      if(!profilepic){
          return res.status(400).json({message : "Profile pic required"});
       }
-      const uploadedResponse = await cloudinary.uploader.upload(profilePic)
-      const updatedUser = User.findByIdAndUpdate(
+      const uploadedResponse = await cloudinary.uploader.upload(profilepic)
+      const updatedUser = await  User.findByIdAndUpdate(
          userId,
-         {profilepic : uploadedResponse},
+         {profilepic : uploadedResponse.secure_url},
          {new : true}
       );
       res.status(200).json(updatedUser);
